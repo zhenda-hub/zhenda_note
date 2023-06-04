@@ -1,0 +1,10 @@
+<form method="post">
+    {% csrf_token %}
+    <h3>{{ form_title }}</h3>
+    {% block context %}
+    {{ form.as_p }}
+    {% endblock context %}
+    <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-primary">返回</a>{# 返回之前页面 #}
+    <input type="submit" value="提交" class="btn btn-warning">
+    {#        <button type="submit" class="btn btn-success">submit</button>#}
+</form>
