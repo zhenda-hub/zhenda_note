@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
-from pathlib import Path
 from .local_settings import *
 
 
@@ -85,8 +84,12 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']  # 根static
+STATICFILES_DIRS = [BASE_DIR / 'static']  # 其他静态资源地址
+STATIC_ROOT = BASE_DIR / 'statics'  # 生成环境 使用 collection
 
+# 配置media
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -96,6 +99,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOG_PATH = BASE_DIR / "logs"
 LOG_PATH.mkdir(parents=True, exist_ok=True)
 
+# 配置日志
 LOGGING = {
     'version': 1,  # 保留字
     'disable_existing_loggers': False,  # 禁用已经存在的logger实例
@@ -157,3 +161,4 @@ LOGGING = {
             'level': 'INFO',
     }
 }
+

@@ -131,3 +131,26 @@ class DeleteNotes(DeleteView):
         pk_group = self.kwargs[NOTES_URL_PARAMS[0]]
         success_url = reverse_lazy('web:notes', kwargs={'pk_group': pk_group})
         return success_url
+
+    
+# class NoteDetail(DetailView):
+#     model = Note
+#     fields = ['title', 'content', 'note_group', 'is_fast']
+#     template_name = 'add_note.html'
+#     extra_context = {'form_title': '笔记详情'}
+    
+#     def get_success_url(self):
+#         """
+#         传参写法
+#         """
+#         pk_group = self.kwargs[NOTES_URL_PARAMS[0]]
+#         success_url = reverse_lazy('web:notes', kwargs={'pk_group': pk_group})
+#         return success_url
+    
+
+class NoteFastList(ListView):
+    model = Note
+    fields = ['title', 'content', 'note_group', 'is_fast']
+    template_name = 'note_fast_list.html'
+    # success_url = reverse_lazy('web:index')
+    extra_context = {'form_title': '快捷笔记列表'}
