@@ -2,7 +2,6 @@ import pdb
 
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, HttpResponse, reverse, get_object_or_404
-from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from django.views.generic import (
     RedirectView,
@@ -14,13 +13,14 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User, Group, Permission, ContentType, AbstractUser, AbstractBaseUser, \
+    BaseUserManager, UserManager, PermissionManager, GroupManager
+from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm, PasswordResetForm
 from django.contrib.auth.hashers import make_password, check_password  # 密码加密
 from django.contrib import messages
-from django.urls import reverse
 
 from .forms import LoginUserForm, RegisterUserForm
 
