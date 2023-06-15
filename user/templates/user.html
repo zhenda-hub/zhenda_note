@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    用户详情
+{% endblock title %}
+
+
+{% block content %}
+    <h3>{{ form_title }}</h3>
+    <table class="table table-hover table-bordered table-striped">
+        <thead>
+        <tr>
+
+            <th>
+                id
+            </th>
+            <th>
+                username
+            </th>
+            <th>
+                password
+            </th>
+            <th>
+                email
+            </th>
+            <th>
+                操作
+            </th>
+
+        </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td>
+                    {{ userinfo.id }}
+                </td>
+                <td>
+                    {{ userinfo.username }}
+                </td>
+                <td>
+                    {{ userinfo.password }}
+                </td>
+                <td>
+                    {{ userinfo.email }}
+                </td>
+                <td>
+                    <a type="button" class="btn btn-warning btn-sm" href="{% url 'user:update_user' userinfo.id %}">
+                        修改
+                    </a>
+                    <a type="button" class="btn btn-danger btn-sm" href="{% url 'user:delete_user' userinfo.id %}">
+                        删除
+                    </a>
+                </td>
+
+            </tr>
+
+
+
+        </tbody>
+    </table>
+
+
+{% endblock content %}

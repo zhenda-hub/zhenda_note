@@ -99,6 +99,22 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOG_PATH = BASE_DIR / "logs"
 LOG_PATH.mkdir(parents=True, exist_ok=True)
 
+# 用户邮箱
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.163.com'
+# EMAIL_PORT = 25
+# EMAIL_HOST_USER = ''
+# EMAIL_HOST_PASSWORD = ''
+# EMAIL_SUBJECT_PREFIX = '[zd_note]'
+# EMAIL_USE_TLS = True
+# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+# ACCOUNT_ACTIVATONI_REQUIRED = False
+
 # 配置日志
 LOGGING = {
     'version': 1,  # 保留字

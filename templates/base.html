@@ -55,24 +55,28 @@
                         </button>
                     </form>
                     <ul class="navbar-nav ml-md-auto">
+                        {% if not user.is_authenticated  %}
+
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'user:register' %}">注册 <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'user:login' %}">登录 <span class="sr-only">(current)</span></a>
                         </li>
+                        {% else %}
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink"
-                               data-toggle="dropdown">ZHENDA</a>
+                               data-toggle="dropdown">{{ user }}</a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">个人信息</a>
+                                <a class="dropdown-item" href="{% url 'user:update_user' user.pk %}">个人信息</a>
 {#                                <a class="dropdown-item" href="#">Another action</a>#}
 {#                                <a class="dropdown-item" href="#">Something else here</a>#}
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">退出</a>
+                                <a class="dropdown-item" href="{% url 'user:logout' %}">退出</a>
                             </div>
                         </li>
+                        {% endif %}
                     </ul>
                 </div>
             </nav>
@@ -240,8 +244,7 @@
         {% endblock all_content %}
     </div>
     <div class="row">
-        <div class="col-md-12">
-
+        <div class="col-md-12" style="text-align: center">
             <address>
                 <strong>Twitter, Inc.</strong><br/> 795 Folsom Ave, Suite 600<br/> San Francisco, CA 94107<br/> <abbr
                     title="Phone">P:</abbr> (123) 456-7890

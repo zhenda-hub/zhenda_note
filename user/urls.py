@@ -22,10 +22,11 @@ from . import views
 app_name = 'user'
 urlpatterns = [
     path('login/', views.Login.as_view(), name='login'),
-    path('logout/', views.LoginOut.as_view(), name='logout'),
+    path('logout/', views.Logout.as_view(), name='logout'),
+    path('register/', views.Register.as_view(), name='register'),
+    # path('detail_user/<int:pk>/', views.DetailUser.as_view(), name='detail_user'),  # update_user 代替
 
     path('list_user/', views.ListUser.as_view(), name='list_user'),
-    path('register/', views.Register.as_view(), name='register'),
     path('delete_user/<int:pk>/', views.DeleteUser.as_view(), name='delete_user'),
     path('update_user/<int:pk>/', views.UpdateUser.as_view(), name='update_user'),
 
