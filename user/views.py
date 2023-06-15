@@ -136,3 +136,24 @@ class UpdateUser(UpdateView):
     template_name = 'register.html'
     success_url = reverse_lazy('user:list_user')
     extra_context = {'form_title': '更新用户'}
+
+
+# class ResetPassword(FormView):
+#     form_class = PasswordResetForm
+#     template_name = 'reset_password.html'
+#     success_url = reverse_lazy('web:index')
+#     extra_context = {'form_title': '重置密码'}
+#
+#     def form_valid(self, form):
+#         """
+#         验证表单
+#         """
+#         email = form.cleaned_data['email']
+#         form.save(
+#             request=self.request,
+#             subject_template_name='registration/password_reset_subject.txt',
+#             email_template_name='registration/password_reset_email.html',
+#             # html_email_template_name=None,
+#             # extra_email_context=None
+#         )
+#         return super().form_valid(form)

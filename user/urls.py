@@ -21,11 +21,15 @@ from . import views
 
 app_name = 'user'
 urlpatterns = [
+    # 前台
     path('login/', views.Login.as_view(), name='login'),
     path('logout/', views.Logout.as_view(), name='logout'),
     path('register/', views.Register.as_view(), name='register'),
+
+    # path('reset_password/<int:pk>/', views.ResetPassword.as_view(), name='reset_password'),
     # path('detail_user/<int:pk>/', views.DetailUser.as_view(), name='detail_user'),  # update_user 代替
 
+    # 后台
     path('list_user/', views.ListUser.as_view(), name='list_user'),
     path('delete_user/<int:pk>/', views.DeleteUser.as_view(), name='delete_user'),
     path('update_user/<int:pk>/', views.UpdateUser.as_view(), name='update_user'),
