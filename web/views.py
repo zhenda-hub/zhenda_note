@@ -27,6 +27,16 @@ class ListNoteGroup(ListView):
     # queryset = NoteGroup.objects.all()
     context_object_name = 'note_groups'  # 默认为 object_list
 
+    def get_queryset(self):
+        # pdb.set_trace()
+        user = self.request.user
+        if user.is_anonymous:
+            # 如果用户是匿名用户，返回一个空的查询集或其他处理
+            return Note.objects.none()
+        else:
+            queryset = super().get_queryset().filter(user=user)
+            return queryset
+
 
 class AddNoteGroup(CreateView):
     model = NoteGroup
@@ -35,6 +45,14 @@ class AddNoteGroup(CreateView):
     # success_url = '/'
     success_url = reverse_lazy('web:index')  # lazy 真香
     extra_context = {'form_title': '添加组'}
+
+    def form_valid(self, form):
+        """
+        自动添加当前用户
+        """
+        # pdb.set_trace()
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 class UpdateNoteGroup(UpdateView):
@@ -78,7 +96,7 @@ class ListNotes(ListView):
 
 class AddNotes(CreateView):
     model = Note
-    fields = ['title', 'content', 'note_group', 'is_fast']
+    fields = ['title', 'content', 'is_fast']
     # fields = '__all__'
     template_name = 'add_note.html'
 
@@ -86,13 +104,22 @@ class AddNotes(CreateView):
 
     # initial = {'note_group': self.kwargs}
 
-    def get_initial(self):
+    # def get_initial(self):
+    #     """
+    #     添加默认值
+    #     """
+    #     initial = super().get_initial()
+    #     initial['note_group'] = NoteGroup.objects.get(pk=self.kwargs[NOTES_URL_PARAMS[0]])
+    #     return initial
+
+    def form_valid(self, form):
         """
-        添加默认值
+        自动添加 当前用户,当前组
         """
-        initial = super().get_initial()
-        initial['note_group'] = NoteGroup.objects.get(pk=self.kwargs[NOTES_URL_PARAMS[0]])
-        return initial
+        # pdb.set_trace()
+        form.instance.user = self.request.user
+        form.instance.note_group = NoteGroup.objects.get(pk=self.kwargs[NOTES_URL_PARAMS[0]])
+        return super().form_valid(form)
 
     def get_success_url(self):
         """
