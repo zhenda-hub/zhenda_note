@@ -1,8 +1,8 @@
 from django.db import models
 from utils.base_model import BaseModel
 
-# from user.models import User
-from django.contrib.auth.models import AbstractUser, User
+from user.models import User
+# from django.contrib.auth.models import AbstractUser, User
 
 
 # def get_default_user():
@@ -28,7 +28,7 @@ class Note(BaseModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='用户')
 
     def __str__(self):
-        return f'{self.user}-{self.note_group}-{self.title}'
+        return f'{self.note_group}-{self.title}'
         # return f'{self.note_group}-{self.title}'
 
 

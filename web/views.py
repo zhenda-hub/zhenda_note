@@ -24,7 +24,6 @@ NOTEGROUPS_URL_PARAMS = ['pk']
 class ListNoteGroup(ListView):
     model = NoteGroup
     template_name = 'base.html'
-    # queryset = NoteGroup.objects.all()
     context_object_name = 'note_groups'  # 默认为 object_list
 
     def get_queryset(self):
@@ -32,7 +31,7 @@ class ListNoteGroup(ListView):
         user = self.request.user
         if user.is_anonymous:
             # 如果用户是匿名用户，返回一个空的查询集或其他处理
-            return Note.objects.none()
+            return self.model.objects.none()
         else:
             queryset = super().get_queryset().filter(user=user)
             return queryset
@@ -83,6 +82,7 @@ class ListNotes(ListView):
     def get_context_data(self, *args, **kwargs):  # 添加传递给模板的数据
         context = super().get_context_data(**kwargs)
         context['group_pk'] = self.kwargs[NOTES_URL_PARAMS[0]]
+        # pdb.set_trace()
         context['group_obj'] = NoteGroup.objects.get(pk=context['group_pk'])
         # pdb.set_trace()
         return context
