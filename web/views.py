@@ -40,7 +40,7 @@ class ListNoteGroup(ListView):
 class AddNoteGroup(CreateView):
     model = NoteGroup
     fields = ['name']
-    template_name = 'add_group.html'
+    template_name = 'web/add_group.html'
     # success_url = '/'
     success_url = reverse_lazy('web:index')  # lazy 真香
     extra_context = {'form_title': '添加组'}
@@ -57,7 +57,7 @@ class AddNoteGroup(CreateView):
 class UpdateNoteGroup(UpdateView):
     model = NoteGroup
     fields = ['name']
-    template_name = 'add_group.html'
+    template_name = 'web/add_group.html'
     success_url = reverse_lazy('web:index')
     extra_context = {'form_title': '更新组名'}
 
@@ -65,7 +65,7 @@ class UpdateNoteGroup(UpdateView):
 class DeleteNoteGroup(DeleteView):
     model = NoteGroup
     fields = ['name']
-    template_name = 'delete_group.html'
+    template_name = 'web/delete_group.html'
     success_url = reverse_lazy('web:index')
     extra_context = {'form_title': '删除组名'}
     # context_object_name = 'ttttt'  # 默认为 object
@@ -76,7 +76,7 @@ NOTES_URL_PARAMS = ['pk_group', 'pk']
 
 class ListNotes(ListView):
     model = Note
-    template_name = 'notes.html'
+    template_name = 'web/notes.html'
     context_object_name = 'notes'  # 默认为 object_list
 
     def get_context_data(self, *args, **kwargs):  # 添加传递给模板的数据
@@ -98,7 +98,7 @@ class AddNotes(CreateView):
     model = Note
     fields = ['title', 'content', 'is_fast']
     # fields = '__all__'
-    template_name = 'add_note.html'
+    template_name = 'web/add_note.html'
 
     extra_context = {'form_title': '添加笔记'}
 
@@ -133,7 +133,7 @@ class AddNotes(CreateView):
 class UpdateNotes(UpdateView):
     model = Note
     fields = ['title', 'content', 'note_group', 'is_fast']
-    template_name = 'add_note.html'
+    template_name = 'web/add_note.html'
     extra_context = {'form_title': '更新笔记'}
 
     def get_success_url(self):
@@ -148,7 +148,7 @@ class UpdateNotes(UpdateView):
 class DeleteNotes(DeleteView):
     model = Note
     fields = ['title', 'content', 'note_group', 'is_fast']
-    template_name = 'delete_note.html'
+    template_name = 'web/delete_note.html'
     extra_context = {'form_title': '删除笔记'}
 
     def get_success_url(self):
@@ -178,6 +178,6 @@ class DeleteNotes(DeleteView):
 class NoteFastList(ListView):
     model = Note
     fields = ['title', 'content', 'note_group', 'is_fast']
-    template_name = 'note_fast_list.html'
+    template_name = 'web/note_fast_list.html'
     # success_url = reverse_lazy('web:index')
     extra_context = {'form_title': '快捷笔记列表'}

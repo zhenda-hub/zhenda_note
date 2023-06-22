@@ -28,13 +28,16 @@
                     <ul class="navbar-nav">
 {#                        <li class="nav-item active">#}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'web:index' %}">首页<span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{% url 'web:index' %}">分组列表<span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">快速访问</a>
                         </li>
+{#                        <li class="nav-item">#}
+{#                            <a class="nav-link" href="{% url 'user:list_user' %}">用户列表</a>#}
+{#                        </li>#}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'user:list_user' %}">用户列表</a>
+                            <a class="nav-link" href="{% url 'update_notice:update_notice' %}">更新公告</a>
                         </li>
                         {#                        <li class="nav-item dropdown">#}
                         {#                            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink"#}
@@ -97,11 +100,11 @@
     <div class="row">
         {% block all_content %}
             <div class="col-md-3">
-                <div class="page-header">
-                    <h3>
-                        侧边栏
-                    </h3>
-                </div>
+{#                <div class="page-header">#}
+{#                    <h3>#}
+{#                        侧边栏#}
+{#                    </h3>#}
+{#                </div>#}
                 {% block sidebar %}
                     {#                    <div class="list-group">#}
                     {#                        <a href="#" class="list-group-item list-group-item-action active">#}
@@ -161,11 +164,11 @@
             </div>
 
             <div class="col-md-9">
-                <div class="page-header">
-                    <h1>
-                        主要内容
-                    </h1>
-                </div>
+{#                <div class="page-header">#}
+{#                    <h1>#}
+{#                        主要内容#}
+{#                    </h1>#}
+{#                </div>#}
                 <br>
                 {% block content %}
                     {#            <nav>#}

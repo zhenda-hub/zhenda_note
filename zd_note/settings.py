@@ -85,7 +85,7 @@ USE_TZ = False
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']  # 其他静态资源地址
-STATIC_ROOT = BASE_DIR / 'statics'  # 生成环境 使用 collection
+STATIC_ROOT = BASE_DIR / 'all_static'  # 生成环境 使用 collection
 
 # 配置media
 MEDIA_URL = 'media/'

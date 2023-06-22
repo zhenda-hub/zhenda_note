@@ -30,7 +30,7 @@ class Login(FormView):
     # model = User
     # fields = ['username', 'password']
     form_class = LoginUserForm
-    template_name = 'login.html'
+    template_name = 'user/login.html'
     success_url = reverse_lazy('web:index')
     extra_context = {'form_title': '登录'}
 
@@ -83,7 +83,7 @@ class Logout(RedirectView):
 class ListUser(ListView):
     model = User
     fields = ['username', 'password', 'email']
-    template_name = 'users.html'
+    template_name = 'user/users.html'
     success_url = reverse_lazy('web:index')
     extra_context = {'form_title': '用户列表'}
 
@@ -100,7 +100,7 @@ class Register(FormView):
 
     form_class = RegisterUserForm
     # form_class = UserCreationForm
-    template_name = 'register.html'
+    template_name = 'user/register.html'
     success_url = reverse_lazy('web:index')
     extra_context = {'form_title': '注册'}
 
@@ -125,7 +125,7 @@ class Register(FormView):
 class DeleteUser(DeleteView):
     model = User
     fields = ['username', 'password', 'email']
-    template_name = 'delete_user.html'
+    template_name = 'user/delete_user.html'
     success_url = reverse_lazy('user:list_user')
     extra_context = {'form_title': '删除用户'}
 
@@ -133,7 +133,7 @@ class DeleteUser(DeleteView):
 class UpdateUser(UpdateView):
     model = User
     fields = ['username', 'password', 'email']
-    template_name = 'register.html'
+    template_name = 'user/register.html'
     success_url = reverse_lazy('user:list_user')
     extra_context = {'form_title': '更新用户'}
 
