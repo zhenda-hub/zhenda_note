@@ -1,23 +1,23 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    {{ group_obj }}组-笔记页面
+    快速访问笔记页面
 {% endblock title %}
 
 {% block content %}
     <h3>
-        {{ group_obj }}组-笔记表
+        快速访问笔记页面
 {#        {{ request.path }}--{{ request.build_absolute_uri }}#}
     </h3>
-    <a type="button" class="btn btn-success" href="{% url 'web:add_notes' group_pk %}">
-        添加笔记
-    </a>
     <table class="table table-hover table-bordered table-striped">
         <thead>
         <tr>
 
             <th>
                 id
+            </th>
+            <th>
+                所属组名
             </th>
             <th>
                 题目
@@ -42,6 +42,9 @@
                     {{ i.id }}
                 </td>
                 <td>
+                    {{ i.note_group }}
+                </td>
+                <td>
                     {{ i.title }}
                 </td>
                 <td>
@@ -52,14 +55,12 @@
                 </td>
 
                 <td>
-{#                    <a type="button" class="btn btn-primary btn-sm" href="{% url 'web:notes' i.id %}">#}
-{#                        进入#}
-{#                    </a>#}
-                    <a type="button" class="btn btn-warning btn-sm" href="{% url 'web:modify_notes' group_pk i.id %}">
+
+                    <a type="button" class="btn btn-warning btn-sm" href="{% url 'web:modify_notes' i.note_group_id i.id %}">
                         修改
                     </a>
-                    <a type="button" class="btn btn-danger btn-sm" href="{% url 'web:delete_notes' group_pk i.id %}">
-                        删除
+                    <a type="button" class="btn btn-primary btn-sm" href="{% url 'web:notes' i.note_group_id %}">
+                        进入组
                     </a>
                 </td>
 

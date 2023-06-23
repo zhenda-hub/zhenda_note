@@ -28,12 +28,15 @@ urlpatterns = [
     path('update_note_groups/<int:pk>/', views.UpdateNoteGroup.as_view(), name='update_note_groups'),
     path('delete_note_groups/<int:pk>/', views.DeleteNoteGroup.as_view(), name='delete_note_groups'),
 
+    path('note_fast_list/', views.NoteFastList.as_view(), name='note_fast_list'),
     # note页面
     path('note_groups/<int:pk_group>/', include([
         path('notes/', views.ListNotes.as_view(), name='notes'),
         path('add_notes/', views.AddNotes.as_view(), name='add_notes'),
         path('delete_notes/<int:pk>/', views.DeleteNotes.as_view(), name='delete_notes'),
         path('modify_notes/<int:pk>/', views.UpdateNotes.as_view(), name='modify_notes'),
+
+
     ])),
 
 

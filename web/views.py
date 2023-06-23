@@ -177,7 +177,27 @@ class DeleteNotes(DeleteView):
 
 class NoteFastList(ListView):
     model = Note
-    fields = ['title', 'content', 'note_group', 'is_fast']
     template_name = 'web/note_fast_list.html'
-    # success_url = reverse_lazy('web:index')
     extra_context = {'form_title': '快捷笔记列表'}
+    context_object_name = 'notes'  # 默认为 object_list
+
+    def get_queryset(self):  # 不要返回所有，返回本人的.
+        """ 先到这里 """
+        queryset = super().get_queryset()
+        # pdb.set_trace()
+        queryset = queryset.filter(user=self.request.user)
+        queryset = queryset.filter(is_fast=True)
+        return queryset
+
+    def get_context_data(self, *args, **kwargs):  # 添加传递给模板的数据
+        """ 分组显示 """
+        context = super().get_context_data(**kwargs)
+        grouped_data = context['notes'].values('note_group')
+        from django.db.models import Count
+        ttt = context['notes'].values('note_group').annotate(count=Count('id'))
+        # pdb.set_trace()
+        # context['group_pk'] = self.kwargs[NOTES_URL_PARAMS[0]]
+        # context['group_obj'] = NoteGroup.objects.get(pk=context['group_pk'])
+
+        return context
+
