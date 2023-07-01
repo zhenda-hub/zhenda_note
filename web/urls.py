@@ -22,6 +22,7 @@ from . import views
 
 app_name = 'web'
 urlpatterns = [
+    # TODO url update
     path('', views.ListNoteGroup.as_view(), name='index'),  # 首页
     # group页面
     path('add_note_groups/', views.AddNoteGroup.as_view(), name='add_note_groups'),

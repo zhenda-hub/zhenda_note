@@ -3,56 +3,22 @@
 {% block all_content %}
 
     <div class="col-md-12">
+
         <ul>
-            <li class="list-item">
-                <h2>
-                    Heading
-                </h2>
-                <p>
-                    Lorem ipsum dolor sit amet.
-                </p>
-                <p>
-                    <a class="btn" href="#">View details »</a>
-                </p>
+            {% for note in notes %}
+                <li class="list-item">
+                    <h2>
+                        {{ note.title }}
+                    </h2>
+                    <p>
+                        {{ note.content }}
+                    </p>
+                    <p>
+                        <a class="btn" href="{% url 'web:modify_notes' note.note_group_id note.pk %}">View details »</a>
+                    </p>
 
-            </li>
-            <li class="list-item">
-                <h2>
-                    Heading
-                </h2>
-                <p>
-                    Consectetur adipiscing elit
-                </p>
-                <p>
-                    <a class="btn" href="#">View details »</a>
-                </p>
-
-            </li>
-            <li class="list-item">
-                <h2>
-                    Heading
-                </h2>
-                <p>
-                    Integer molestie lorem at massa
-                </p>
-                <p>
-                    <a class="btn" href="#">View details »</a>
-                </p>
-
-            </li>
-            <li class="list-item">
-                <h2>
-                    Heading
-                </h2>
-                <p>
-                    Facilisis in pretium nisl aliquet
-                </p>
-                <p>
-                    <a class="btn" href="#">View details »</a>
-                </p>
-
-            </li>
-
+                </li>
+            {% endfor %}
         </ul>
     </div>
 {% endblock all_content %}
