@@ -3,18 +3,18 @@
 {% block all_content %}
 
     <div class="col-md-12">
-
+        <h4>笔记搜索结果：</h4>
         <ul>
             {% for note in notes %}
                 <li class="list-item">
-                    <h2>
-                        {{ note.title }}
-                    </h2>
+{#                    <h4>#}
+{#                        {{ note.title }}#}
+{#                    </h4>#}
+{#                    <p>#}
+{#                        {{ note.content }}#}
+{#                    </p>#}
                     <p>
-                        {{ note.content }}
-                    </p>
-                    <p>
-                        <a class="btn" href="{% url 'web:modify_notes' note.note_group_id note.pk %}">View details »</a>
+                        <a class="btn text-primary" href="{% url 'web:modify_notes' note.note_group_id note.pk %}">{{ note.title }}</a>
                     </p>
 
                 </li>
