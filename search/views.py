@@ -8,7 +8,7 @@ from web.models import Note
 
 def get_search(request):
     q_text = request.GET.get('q')
-    # TODO search method
+
     notes = Note.objects.filter(user=request.user).filter(
         Q(title__contains=q_text) | Q(content__contains=q_text)
     )
