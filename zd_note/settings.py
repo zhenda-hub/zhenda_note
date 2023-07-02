@@ -228,5 +228,7 @@ AUTHENTICATION_BACKENDS = [
 #             'level': 'INFO',
 #     }
 # }
-
-from .local_settings import *  # 最后导入本地配置
+try:
+    from .local_settings import *  # 最后导入本地配置
+except ImportError:
+    pass
