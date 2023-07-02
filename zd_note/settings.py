@@ -167,66 +167,66 @@ AUTHENTICATION_BACKENDS = [
 # ACCOUNT_ACTIVATONI_REQUIRED = False
 
 # 配置日志
-LOGGING = {
-    'version': 1,  # 保留字
-    'disable_existing_loggers': False,  # 禁用已经存在的logger实例
-    # 日志文件的格式
-    'formatters': {
-        # 详细的日志格式
-        'standard': {
-            'format': '[%(asctime)s][%(threadName)s:%(thread)d][task_id:%(name)s][%(filename)s:%(lineno)d][%(levelname)s][%(message)s]'
-        },
-        # 简单的日志格式
-        'simple': {
-            'format': '[%(levelname)s][%(asctime)s][%(filename)s:%(lineno)d] %(message)s',
-            # 'format': '[%(levelname)s][%(asctime)s][%(funcName)s:%(lineno)d] %(message)s',
-            # 'format': '[%(levelname)s][%(asctime)s][%(pathname)s:%(lineno)d] %(message)s',
-        },
-    },
-    # 过滤器
-    'filters': {
-        'require_debug_true': {
-            '()': 'django.utils.log.RequireDebugTrue',
-        },
-    },
-    # 处理器
-    'handlers': {
-        'console': {     # 在终端打印
-            'level': 'INFO',
-            'filters': ['require_debug_true'],  # 只有在Django debug为True时才在屏幕打印日志
-            'class': 'logging.StreamHandler',  #
-            'formatter': 'simple',
-        },
-        'default': {    # 默认的
-            'level': 'INFO',
-            'class': 'logging.handlers.RotatingFileHandler',  # 保存到文件，自动切
-            'filename': LOG_PATH / "all.log",  # 日志文件
-            'maxBytes': 1024 * 1024 * 5,                    # 日志大小 5M
-            'backupCount': 3,                                # 最多备份几个
-            'formatter': 'simple',
-            'encoding': 'utf-8',
-        },
-        'error': {   # 专门用来记错误日志
-            'level': 'ERROR',
-            'class': 'logging.handlers.RotatingFileHandler',  # 保存到文件，自动切
-            'filename': LOG_PATH / "error.log",  # 日志文件
-            'maxBytes': 1024 * 1024 * 5,  # 日志大小 5M
-            'backupCount': 5,
-            'formatter': 'simple',
-            'encoding': 'utf-8',
-        },
-    },
-    'loggers': {
-        'django': {             # 默认的logger应用如下配置
-            'handlers': ['default', 'console', 'error'],  # 上线之后可以把'console'移除
-            'level': 'INFO',
-            'propagate': False,  # 向不向 父logger传递
-        },
-    },
-    'root': {
-            'handlers': ['default', 'console', 'error'],  # 上线之后可以把'console'移除
-            'level': 'INFO',
-    }
-}
+# LOGGING = {
+#     'version': 1,  # 保留字
+#     'disable_existing_loggers': False,  # 禁用已经存在的logger实例
+#     # 日志文件的格式
+#     'formatters': {
+#         # 详细的日志格式
+#         'standard': {
+#             'format': '[%(asctime)s][%(threadName)s:%(thread)d][task_id:%(name)s][%(filename)s:%(lineno)d][%(levelname)s][%(message)s]'
+#         },
+#         # 简单的日志格式
+#         'simple': {
+#             'format': '[%(levelname)s][%(asctime)s][%(filename)s:%(lineno)d] %(message)s',
+#             # 'format': '[%(levelname)s][%(asctime)s][%(funcName)s:%(lineno)d] %(message)s',
+#             # 'format': '[%(levelname)s][%(asctime)s][%(pathname)s:%(lineno)d] %(message)s',
+#         },
+#     },
+#     # 过滤器
+#     'filters': {
+#         'require_debug_true': {
+#             '()': 'django.utils.log.RequireDebugTrue',
+#         },
+#     },
+#     # 处理器
+#     'handlers': {
+#         'console': {     # 在终端打印
+#             'level': 'INFO',
+#             'filters': ['require_debug_true'],  # 只有在Django debug为True时才在屏幕打印日志
+#             'class': 'logging.StreamHandler',  #
+#             'formatter': 'simple',
+#         },
+#         'default': {    # 默认的
+#             'level': 'INFO',
+#             'class': 'logging.handlers.RotatingFileHandler',  # 保存到文件，自动切
+#             'filename': LOG_PATH / "all.log",  # 日志文件
+#             'maxBytes': 1024 * 1024 * 5,                    # 日志大小 5M
+#             'backupCount': 3,                                # 最多备份几个
+#             'formatter': 'simple',
+#             'encoding': 'utf-8',
+#         },
+#         'error': {   # 专门用来记错误日志
+#             'level': 'ERROR',
+#             'class': 'logging.handlers.RotatingFileHandler',  # 保存到文件，自动切
+#             'filename': LOG_PATH / "error.log",  # 日志文件
+#             'maxBytes': 1024 * 1024 * 5,  # 日志大小 5M
+#             'backupCount': 5,
+#             'formatter': 'simple',
+#             'encoding': 'utf-8',
+#         },
+#     },
+#     'loggers': {
+#         'django': {             # 默认的logger应用如下配置
+#             'handlers': ['default', 'console', 'error'],  # 上线之后可以把'console'移除
+#             'level': 'INFO',
+#             'propagate': False,  # 向不向 父logger传递
+#         },
+#     },
+#     'root': {
+#             'handlers': ['default', 'console', 'error'],  # 上线之后可以把'console'移除
+#             'level': 'INFO',
+#     }
+# }
 
 from .local_settings import *  # 最后导入本地配置
