@@ -21,6 +21,15 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+CSRF_TRUSTED_ORIGINS = [
+    'http://134.175.124.152'
+]
+
+CORS_ORIGIN_WHITELIST = [
+    'http://134.175.124.152',
+    # 其他受信任的来源
+]
+
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
