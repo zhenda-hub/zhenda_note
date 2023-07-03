@@ -29,8 +29,7 @@ class ListNoteGroup(ListView):
     def get_queryset(self):
         # pdb.set_trace()
         user = self.request.user
-        if user.is_anonymous:
-            # 如果用户是匿名用户，返回一个空的查询集或其他处理
+        if user.is_anonymous:  # 如果用户是匿名用户，返回一个空的查询集或其他处理
             return self.model.objects.none()
         else:
             queryset = super().get_queryset().filter(user=user)
@@ -185,8 +184,12 @@ class NoteFastList(ListView):
         """ 先到这里 """
         queryset = super().get_queryset()
         # pdb.set_trace()
-        queryset = queryset.filter(user=self.request.user)
-        queryset = queryset.filter(is_fast=True)
+        user = self.request.user
+        if user.is_anonymous:
+            return self.model.objects.none()
+        else:
+            queryset = queryset.filter(user=self.request.user)
+            queryset = queryset.filter(is_fast=True)
         return queryset
 
     def get_context_data(self, *args, **kwargs):  # 添加传递给模板的数据
