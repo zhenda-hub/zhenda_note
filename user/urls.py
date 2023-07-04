@@ -34,7 +34,9 @@ urlpatterns = [
     # 后台
     path('list_user/', views.ListUser.as_view(), name='list_user'),
     path('delete_user/<int:pk>/', views.DeleteUser.as_view(), name='delete_user'),
-    path('update_user/<int:pk>/', views.UpdateUser.as_view(), name='update_user'),  # FIXME
+    path('update_user/<int:pk>/', views.UpdateUser.as_view(), name='update_user'),
+    # path('<int:pk>/password/', views.PasswordChangeView.as_view(), name='password_change'),
+
     # path('update_user/<int:pk>/', views.user_profile, name='update_user'),
 
 ]

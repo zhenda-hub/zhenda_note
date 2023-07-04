@@ -16,7 +16,7 @@ from django.views.generic import (
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.models import User, Group, Permission, ContentType, AbstractUser, AbstractBaseUser, \
     BaseUserManager, UserManager, PermissionManager, GroupManager
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password, check_password  # 密码加密
@@ -27,7 +27,9 @@ from .forms import (
     RegisterUserForm,
     UserCreationForm,
     UserChangeForm,
-    PasswordChangeForm
+    PasswordChangeForm,
+    MyUserChangeForm,
+    MyUserCreationForm
 )
 
 
@@ -130,53 +132,62 @@ class ListUser(ListView):
 #         return super().form_invalid(form)
 
 
-class Register(CreateView):
-    form_class = UserCreationForm
+class Register(CreateView):  # CreateView必须指定模型！！
+# class Register(FormView):
+    form_class = MyUserCreationForm
+    # form_class = RegisterUserForm
     success_url = reverse_lazy('user:login')
     template_name = 'user/register.html'
+    extra_context = {'form_title': '注册'}
 
-    def form_valid(self, form):
-        response = super().form_valid(form)
-        pdb.set_trace()
-        username = form.cleaned_data.get('username')
-        password = form.cleaned_data.get('password1')
-        self.object.set_password(password)
-        self.object.save()
-        return response
+    # def form_valid(self, form):
+    #     response = super().form_valid(form)
+    #     username = form.cleaned_data['username']
+    #     password = form.cleaned_data['password']
+    #     email = form.cleaned_data['email']
+    #     user = User.objects.create(username=username, password=make_password(password), email=email)
+    #     # user.save()
+    #     return response
 
-    def form_invalid(self, form):
-        return super().form_invalid(form)
+    #
+    # def form_invalid(self, form):
+    #     return super().form_invalid(form)
 
 
-class DeleteUser(DeleteView):
-    model = User
-    fields = ['username', 'password', 'email']
-    template_name = 'user/delete_user.html'
-    success_url = reverse_lazy('user:list_user')
-    extra_context = {'form_title': '删除用户'}
+# class UpdateUser(UpdateView):
+#     model = User
+#     fields = ['username', 'password', 'email']
+#     template_name = 'user/register.html'
+#     success_url = reverse_lazy('user:list_user')
+#     extra_context = {'form_title': '更新用户'}
 
 
 class UpdateUser(UpdateView):
     model = User
+    # form_class = MyUserChangeForm
+    # form_class = UserChangeForm
     fields = ['username', 'password', 'email']
     template_name = 'user/register.html'
-    success_url = reverse_lazy('user:list_user')
-    extra_context = {'form_title': '更新用户'}
+    success_url = reverse_lazy('user:login')
 
-# class UpdateUser(UpdateView):
-#     model = User
-#     form_class = UserChangeForm
-#     template_name = 'user/register.html'
-#     success_url = reverse_lazy('user:login')
-#
-#     def get_object(self, queryset=None):
-#         return self.request.user
-#
-#     def form_valid(self, form):
-#         if form.cleaned_data['password'] == '':
-#             form.cleaned_data['password'] = self.request.user.password
-#         return super().form_valid(form)
+    # def get_object(self, queryset=None):
+    #     return self.request.user
+    #
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        username = form.cleaned_data.get('username')
+        password = form.cleaned_data.get('password')
+        email = form.cleaned_data.get('email')
+        # pdb.set_trace()
 
+        if form.cleaned_data['password'] == '':
+            form.cleaned_data['password'] = self.request.user.password
+
+        self.object.set_password(password)  # 加密记录
+        self.object.username = username
+        self.object.email = email
+        self.object.save()
+        return response
 
 
 # class ResetPassword(FormView):
@@ -198,3 +209,11 @@ class UpdateUser(UpdateView):
 #             # extra_email_context=None
 #         )
 #         return super().form_valid(form)
+
+
+class DeleteUser(DeleteView):
+    model = User
+    fields = ['username', 'password', 'email']
+    template_name = 'user/delete_user.html'
+    success_url = reverse_lazy('user:list_user')
+    extra_context = {'form_title': '删除用户'}
