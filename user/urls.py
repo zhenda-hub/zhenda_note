@@ -32,7 +32,7 @@ urlpatterns = [
     # path('detail_user/<int:pk>/', views.DetailUser.as_view(), name='detail_user'),  # update_user 代替
 
     # 后台
-    path('list_user/', views.ListUser.as_view(), name='list_user'),
+    # path('list_user/', views.ListUser.as_view(), name='list_user'),  # 在后台管理中，不需要这个页面
     path('delete_user/<int:pk>/', views.DeleteUser.as_view(), name='delete_user'),
     path('update_user/<int:pk>/', views.UpdateUser.as_view(), name='update_user'),
     # path('<int:pk>/password/', views.PasswordChangeView.as_view(), name='password_change'),
