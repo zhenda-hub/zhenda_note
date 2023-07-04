@@ -155,9 +155,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# 创建log文件的文件夹
-LOG_PATH = BASE_DIR / "logs"
-LOG_PATH.mkdir(parents=True, exist_ok=True)
 
 # 用户邮箱
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -175,6 +172,9 @@ AUTHENTICATION_BACKENDS = [
 
 # ACCOUNT_ACTIVATONI_REQUIRED = False
 
+# # 创建log文件的文件夹
+# LOG_PATH = BASE_DIR / "logs"
+# LOG_PATH.mkdir(parents=True, exist_ok=True)
 # 配置日志
 # LOGGING = {
 #     'version': 1,  # 保留字
