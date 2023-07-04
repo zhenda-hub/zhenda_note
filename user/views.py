@@ -33,6 +33,9 @@ from .forms import (
 )
 
 
+# NOTE 表单写好了， 不用视图类，直接用视图函数
+
+
 class Login(FormView):
     # 不能使用这两个属性
     # model = User
