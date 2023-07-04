@@ -1,7 +1,14 @@
 from django.contrib.auth.models import AbstractUser, User
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, PasswordResetForm, SetPasswordForm, PasswordChangeForm, \
-    AdminPasswordChangeForm, UserChangeForm, AuthenticationForm
+from django.contrib.auth.forms import (
+    UserCreationForm,
+    PasswordResetForm,
+    SetPasswordForm,
+    PasswordChangeForm,
+    AdminPasswordChangeForm,
+    UserChangeForm,
+    AuthenticationForm
+)
 
 
 class LoginUserForm(forms.Form):
