@@ -42,7 +42,6 @@ class Login(FormView):
     # fields = ['username', 'password']
     form_class = LoginUserForm
     template_name = 'user/login.html'
-    success_url = reverse_lazy('web:index')
     extra_context = {'form_title': '登录'}
 
     def form_valid(self, form):
@@ -60,6 +59,16 @@ class Login(FormView):
         else:
             messages.error(self.request, '用户名或密码错误')
             return redirect(reverse('user:login'))
+
+    def get_success_url(self):
+        """
+        自定义 success_url
+        """
+        next_url = self.request.GET.get('next', None)
+        if next_url:
+            return next_url
+        else:
+            return reverse_lazy('web:index')
 
 
 class Logout(RedirectView):

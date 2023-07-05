@@ -13,6 +13,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 
 from .models import Note, NoteGroup
 
@@ -36,7 +37,7 @@ class ListNoteGroup(ListView):
             return queryset
 
 
-class AddNoteGroup(CreateView):
+class AddNoteGroup(LoginRequiredMixin, CreateView):
     model = NoteGroup
     fields = ['name']
     template_name = 'web/add_group.html'
@@ -44,11 +45,12 @@ class AddNoteGroup(CreateView):
     success_url = reverse_lazy('web:index')  # lazy 真香
     extra_context = {'form_title': '添加组'}
 
+    login_url = reverse_lazy('user:login')  # lazy 真香
+
     def form_valid(self, form):
         """
         自动添加当前用户
         """
-        # pdb.set_trace()
         form.instance.user = self.request.user
         return super().form_valid(form)
 
@@ -93,7 +95,7 @@ class ListNotes(ListView):
         return queryset
 
 
-class AddNotes(CreateView):
+class AddNotes(LoginRequiredMixin, CreateView):
     model = Note
     fields = ['title', 'content', 'is_fast']
     # fields = '__all__'
@@ -101,6 +103,7 @@ class AddNotes(CreateView):
 
     extra_context = {'form_title': '添加笔记'}
 
+    login_url = reverse_lazy('user:login')  # lazy 真香
     # initial = {'note_group': self.kwargs}
 
     # def get_initial(self):
@@ -116,6 +119,9 @@ class AddNotes(CreateView):
         自动添加 当前用户,当前组
         """
         # pdb.set_trace()
+        # user = self.request.user
+        # if user.is_anonymous:
+        #     return self.model.objects.none()
         form.instance.user = self.request.user
         form.instance.note_group = NoteGroup.objects.get(pk=self.kwargs[NOTES_URL_PARAMS[0]])
         return super().form_valid(form)
