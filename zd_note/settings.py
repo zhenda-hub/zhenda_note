@@ -89,6 +89,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'django_apscheduler',
+    # 'dbbackup',
+
     'search',
     'update_notice',
     'user',
