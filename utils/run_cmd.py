@@ -10,5 +10,7 @@ def run_cmd(cmd):
 
 def run_cmd2(cmd):
     """执行命令"""
+
+    print('cmd:', cmd)
     p = subprocess.run(cmd, shell=True, capture_output=True, text=True)
     return p.stdout, p.stderr

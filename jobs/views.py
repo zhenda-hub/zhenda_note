@@ -15,18 +15,19 @@ scheduler = BackgroundScheduler()
 scheduler.add_jobstore(DjangoJobStore(), "default")
 
 
-@register_job(scheduler, "interval", seconds=5, replace_existing=True)
-def my_job():
-    print("hello world")
+# @register_job(scheduler, "interval", seconds=5, replace_existing=True)
+# def my_job():
+#     print("hello world")
 
 
-# @register_job(scheduler, "cron", day_of_week='mon-fri', hour=23, minute=30, replace_existing=True)
+@register_job(scheduler, "cron", day_of_week='mon-fri', hour=23, minute=21, replace_existing=True)
 def backup_db():
     print("start backup db")
 
     create_dir('dbback')
-    curtime = datetime.now().strftime('%Y/%m/%d-%H:%M:%S')
+    curtime = datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
     cmd = f'python manage.py dumpdata > dbback/db{curtime}.json --indent=4'
+
     stdout, stderr = run_cmd2(cmd)
     print(stdout, stderr)
 
