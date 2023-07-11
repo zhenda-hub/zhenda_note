@@ -21,6 +21,15 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+CSRF_TRUSTED_ORIGINS = [
+    'http://134.175.124.152'
+]
+
+CORS_ORIGIN_WHITELIST = [
+    'http://134.175.124.152',
+    # 其他受信任的来源
+]
+
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -36,18 +45,21 @@ DATABASES = {
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    # },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 6,
+        }
     },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    # },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    # },
 ]
 
 # 配置redis
@@ -80,6 +92,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'django_apscheduler',
+    # 'dbbackup',
+
     'search',
     'update_notice',
     'user',
@@ -146,9 +162,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# 创建log文件的文件夹
-LOG_PATH = BASE_DIR / "logs"
-LOG_PATH.mkdir(parents=True, exist_ok=True)
 
 # 用户邮箱
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -166,6 +179,9 @@ AUTHENTICATION_BACKENDS = [
 
 # ACCOUNT_ACTIVATONI_REQUIRED = False
 
+# # 创建log文件的文件夹
+# LOG_PATH = BASE_DIR / "logs"
+# LOG_PATH.mkdir(parents=True, exist_ok=True)
 # 配置日志
 # LOGGING = {
 #     'version': 1,  # 保留字

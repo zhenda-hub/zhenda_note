@@ -1,6 +1,6 @@
 import django
 from django.conf import settings as st
-from django_base_pj import settings
+from zd_note import settings
 
 
 if __name__ == '__main__':
