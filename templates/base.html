@@ -151,55 +151,58 @@
                     <a type="button" class="btn btn-success" href="{% url 'web:add_note_groups' %}">
                         添加分组
                     </a>
-                    <table class="table table-hover table-bordered table-striped">
-                        <thead>
-                        <tr>
 
-                            <th>
-                                id
-                            </th>
-                            <th>
-                                组名
-                            </th>
-                            <th>
-                                个数
-                            </th>
-                            <th>
-                                操作
-                            </th>
-
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for i in note_groups %}
+                    <div class="table-responsive">
+                        <table class="table table-hover table-bordered table-striped">
+                            <thead>
                             <tr>
-                                <td>
-                                    {{ i.id }}
-                                </td>
-                                <td>
-                                    {{ i.name }}
-                                </td>
-                                <td>
-                                    {{ i.note_set.count }}
-                                </td>
-                                <td>
-                                    <a type="button" class="btn btn-primary btn-sm" href="{% url 'web:notes' i.id %}">
-                                        进入
-                                    </a>
-                                    <a type="button" class="btn btn-warning btn-sm" href="{% url 'web:update_note_groups' i.id %}">
-                                        修改
-                                    </a>
-                                    <a type="button" class="btn btn-danger btn-sm" href="{% url 'web:delete_note_groups' i.id %}">
-                                        删除
-                                    </a>
-                                </td>
+
+                                <th>
+                                    id
+                                </th>
+                                <th>
+                                    组名
+                                </th>
+                                <th>
+                                    个数
+                                </th>
+                                <th>
+                                    操作
+                                </th>
 
                             </tr>
-                        {% endfor %}
+                            </thead>
+                            <tbody>
+                            {% for i in note_groups %}
+                                <tr>
+                                    <td>
+                                        {{ i.id }}
+                                    </td>
+                                    <td>
+                                        {{ i.name }}
+                                    </td>
+                                    <td>
+                                        {{ i.note_set.count }}
+                                    </td>
+                                    <td>
+                                        <a type="button" class="btn btn-primary btn-sm" href="{% url 'web:notes' i.id %}">
+                                            进入
+                                        </a>
+                                        <a type="button" class="btn btn-warning btn-sm" href="{% url 'web:update_note_groups' i.id %}">
+                                            修改
+                                        </a>
+                                        <a type="button" class="btn btn-danger btn-sm" href="{% url 'web:delete_note_groups' i.id %}">
+                                            删除
+                                        </a>
+                                    </td>
+
+                                </tr>
+                            {% endfor %}
 
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
 
                 {% endblock content %}
             </div>

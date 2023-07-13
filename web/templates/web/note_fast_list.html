@@ -9,67 +9,69 @@
         快速访问笔记页面
 {#        {{ request.path }}--{{ request.build_absolute_uri }}#}
     </h3>
-    <table class="table table-hover table-bordered table-striped">
-        <thead>
-        <tr>
-
-            <th>
-                id
-            </th>
-            <th>
-                所属组名
-            </th>
-            <th>
-                题目
-            </th>
-            <th>
-                内容
-            </th>
-            <th>
-                快速访问
-            </th>
-            <th>
-                操作
-            </th>
-
-
-        </tr>
-        </thead>
-        <tbody>
-        {% for i in notes %}
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered table-striped">
+            <thead>
             <tr>
-                <td>
-                    {{ i.id }}
-                </td>
-                <td>
-                    {{ i.note_group }}
-                </td>
-                <td>
-                    {{ i.title }}
-                </td>
-                <td>
-                    {{ i.content }}
-                </td>
-                <td>
-                    {{ i.is_fast }}
-                </td>
 
-                <td>
+                <th>
+                    id
+                </th>
+                <th>
+                    所属组名
+                </th>
+                <th>
+                    题目
+                </th>
+                <th>
+                    内容
+                </th>
+                <th>
+                    快速访问
+                </th>
+                <th>
+                    操作
+                </th>
 
-                    <a type="button" class="btn btn-warning btn-sm" href="{% url 'web:modify_notes' i.note_group_id i.id %}">
-                        修改
-                    </a>
-                    <a type="button" class="btn btn-primary btn-sm" href="{% url 'web:notes' i.note_group_id %}">
-                        进入组
-                    </a>
-                </td>
 
             </tr>
-        {% endfor %}
+            </thead>
+            <tbody>
+            {% for i in notes %}
+                <tr>
+                    <td>
+                        {{ i.id }}
+                    </td>
+                    <td>
+                        {{ i.note_group }}
+                    </td>
+                    <td>
+                        {{ i.title }}
+                    </td>
+                    <td>
+                        {{ i.content }}
+                    </td>
+                    <td>
+                        {{ i.is_fast }}
+                    </td>
+
+                    <td>
+
+                        <a type="button" class="btn btn-warning btn-sm" href="{% url 'web:modify_notes' i.note_group_id i.id %}">
+                            修改
+                        </a>
+                        <a type="button" class="btn btn-primary btn-sm" href="{% url 'web:notes' i.note_group_id %}">
+                            进入组
+                        </a>
+                    </td>
+
+                </tr>
+            {% endfor %}
 
 
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
 
 
 {% endblock content %}
