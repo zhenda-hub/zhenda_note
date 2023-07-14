@@ -28,7 +28,7 @@ urlpatterns = [
     path('update_notice/', include('update_notice.urls', namespace='update_notice')),
     path('user/', include('user.urls', namespace='user')),
     path('', include('web.urls', namespace='web')),
-    path('jobs/', include('jobs.urls', namespace='jobs')),
+    # path('jobs/', include('jobs.urls', namespace='jobs')),
 
     # path('search/', include(('search.urls', 'search'), namespace='search')),
     # path('update_notice/', include(('update_notice.urls', 'update_notice'), namespace='update_notice')),

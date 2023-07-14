@@ -90,7 +90,8 @@ class ListNotes(ListView):
 
     def get_queryset(self):  # 不要返回所有，返回本组内的
         queryset = super().get_queryset()
-        # pdb.set_trace()
+
+        pdb.set_trace()
         queryset = queryset.filter(note_group__pk=self.kwargs[NOTES_URL_PARAMS[0]])
         return queryset
 
@@ -199,7 +200,7 @@ class NoteFastList(ListView):
         return queryset
 
     def get_context_data(self, *args, **kwargs):  # 添加传递给模板的数据
-        """ 分组显示 """
+        """ TODO 分组显示 """
         context = super().get_context_data(**kwargs)
         grouped_data = context['notes'].values('note_group')
         from django.db.models import Count
